@@ -1,0 +1,74 @@
+<div class="container">
+    <br>
+    <h2>Obtener más pokemos </h2>
+    <br>
+    <form >
+        <div class="form-group">
+          <label for="input1">Agrega un limite</label>
+          <input type="text" class="form-control"  id="input1" [(ngModel)]="inputValue1" name="input1"  pattern="[0-9]*">
+        </div>
+        <div class="form-group">
+          <label for="input2">Agrega un bloque</label>
+          <input type="text" class="form-control" id="input2" [(ngModel)]="inputValue2" name="input2"  pattern="[0-9]*">
+    <br>
+</div>
+         <button class="btn btn-primary" type="button" (click)="getPokemonoGetBloque()">Obtener Pokémon</button>
+
+      </form>
+      <br>
+    <h2>Pokémons </h2>
+    <br>
+    
+    <div class="row m-3">
+        <div class="col-3" *ngFor="let pokemon of pokemon">
+          <div class="card m-2" style="width: 18rem;">
+            <div class="card-body">
+              <a href="javascript:void(0);" class="card-title" (click)="getPokemonHability(pokemon.url)">{{ pokemon.name }}</a>
+              <div *ngIf="datosPokemon && datosPokemon.name === pokemon.name">
+                <br>
+                <img [src]="imgPokemon" alt="Pokemon Sprite">
+                <br>
+                <label class="card-title">Habilidades</label>
+                <br>
+                <ul>
+                  <li class="card-text" *ngFor="let ability of abilities">{{ ability.ability.name }}</li>
+                </ul>
+      
+                <label class="card-title">Apariciones en otro título</label>
+                <ul>
+                  <li class="card-text" *ngFor="let game of game_indices">{{ game.version.name }}</li>
+                </ul>
+                <br>
+                <label class="card-title">Tipo pokemon</label>
+                <ul>
+                  <li class="card-text" *ngFor="let type of types">{{ type.type.name }}</li>
+                </ul>
+                <br>
+                <label class="card-title">Información extra</label>
+                <br>
+                <label class="card-text">Peso:</label><label class="card-text">{{ weight }}</label>
+                <br>
+                <label class="card-text">Altura:</label><label class="card-text">{{ height }}</label>
+                <br>
+                <button (click)="agregarFav(pokemon)" [disabled]="isFavorite(pokemon.name)" class="btn btn-primary">Agregar a favoritos</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <h2>Lista pokémon favoritos</h2>
+      <br>
+      <div class="row m-3">
+        <div class="col-3" *ngFor="let pokemon of favoritePokemons">
+          <div class="card m-2" style="width: 18rem;">
+            <div class="card-body">
+              <h3 class="card-title">{{ pokemon.name }}</h3>
+              <button (click)="eliminarFav(pokemon)" [disabled]="isFavorite(pokemon.name)" class="btn btn-danger">Eliminar de favoritos</button>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+  </div>
